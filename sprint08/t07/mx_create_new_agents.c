@@ -1,0 +1,34 @@
+#include "create_new_agents.h"
+
+t_agent **mx_create_new_agents(char **name, int *power, int *strength, int count) {
+  if (!name || !power || !strength || count < 1) return NULL;
+
+  // try to create an array + 1 for NULL                                                          
+  t_agent **p = (t_agent **) malloc((count + 1)*sizeof(t_agent *));
+  if (!p) return NULL;
+
+  // try to create an agents
+  int i = 0;
+  for (; i < count; i++) {
+    t_agent *new_agent = mx_create_agent(name[i], power[i], strength[i]);
+      if (!new_agent) return NULL;
+    p[i] = new_agent;
+  }
+  p[count] = NULL;  
+  return p;
+}
+
+int main(void) {
+  char *names[] = {"Thompson", "Smith", "Colson"};
+  int powers[] = {33, 66, 99};
+  int strengths[] = {133, 166, 196};
+  t_agent **arr = mx_create_new_agents(names, powers, strengths, 3);
+  for (int i = 0; 1; i++) {
+    if (arr[i] == NULL) {
+      printf("NULL\n");
+      break;
+    }
+    printf("name=%s, power=%d, strength=%d\n", arr[i]->name, arr[i]->power, arr[i]->strength);
+  }
+  return 0;
+}

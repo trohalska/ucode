@@ -1,0 +1,3 @@
+klist
+kinit trohalska
+kdestroy --all
